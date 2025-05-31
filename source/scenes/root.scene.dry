@@ -6,7 +6,7 @@ go-to: post_event if started = 1; start_menu if started = 0
 new-page: true
 go-to: start_menu_2
 
-= Social Democracy: An Alternate History
+= Social Democracy: Washington 1865
 
 @start_menu_2
 
@@ -21,8 +21,8 @@ on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
-Q.year = 1928;
-Q.month = 1;
+Q.year = 1865;
+Q.month = 3;
 // how many actions have been taken this month?
 Q.month_actions = 0;
 
@@ -46,18 +46,16 @@ Q.dissent = 0.05;
 Q.dissent_percent = 5;
 
 // factions
-Q.factions = ['left', 'center', 'labor', 'reformist', 'neorevisionist'];
+Q.factions = ['radical', 'moderate', 'conservative'];
 // should this be normalized to 100%?
-Q.left_strength = 15;
-Q.left_dissent = 20;
-Q.center_strength = 30;
-Q.center_dissent = 0;
-Q.labor_strength = 25;
-Q.labor_dissent = 5;
-Q.reformist_strength = 25;
-Q.reformist_dissent = 5;
-Q.neorevisionist_strength = 5;
-Q.neorevisionist_dissent = 10;
+Q.radical_strength = 25;
+Q.radical_dissent = 20;
+Q.moderate_strength = 30;
+Q.moderate_dissent = 0;
+Q.conservative_strength = 10;
+Q.conservative_dissent = 5;
+Q.socialism_strength = 5;
+Q.socialist_dissent = 35;
 
 // secret events...
 Q.unions_independent = 0;
@@ -65,8 +63,8 @@ Q.centrists_resign = 0;
 Q.left_split = 0;
 Q.reformists_resigned = 0;
 
-// have we discovered neorevisionism?
-Q.neorevisionism = 0;
+// have we discovered socialism?
+Q.socialism = 0;
 
 // crisis_urgency indicates how seriously the SPD is taking the economic crisis - scale from 0 to 10.
 Q.crisis_urgency = 0;
@@ -101,63 +99,26 @@ Q.moderate_plan_adopted = 0;
 // organizations
 
 // inter-party relations
-Q.z_relation = 50;
-Q.kpd_relation = 25;
-Q.ddp_relation = 60;
-Q.dvp_relation = 35;
-// DNVP and NSDAP are invariably hostile
-Q.DNVP_relation = 10;
-Q.NSDAP_relation = 0;
-
-Q.kpd_leader = "Thälmann";
-// alternative is the Conciliators as party leader
-Q.kpd_party_leader = "Thälmann";
-Q.z_leader = "Brüning";
-// party leader - can be Ludwig Kaas, Joseph Joos, or Adam Stegerwald after the 1928 December conference. Joos will be most friendly to the SPD.
-Q.z_party_leader = "Marx";
-Q.nsdap_leader = "Hitler";
+Q.dem_relation = 5;
 
 // hmm... maybe we can play nice with Hindenburg???
 Q.hindenburg_relation = 25;
 
-
-// Does the SPD lead in Prussia?
-Q.spd_prussia = 1;
-// Options: spd, z, dnvp, papen, nsdap
-Q.prussian_government = "SPD";
-
 // The array of forces - paramilitary groups
 // Number of members in 1928 (in thousands)
 // Reichsbanner, stahlhelm, SA, rotfrontkämpferbund
-Q.rb_strength = 2000;
-Q.rb_militancy = 0.01;
-Q.women_in_rb = 0;
-Q.rb_banned = 0;
-Q.sh_strength = 500;
-Q.sh_militancy = 0.5;
-Q.sh_banned = 0;
-Q.sh_banned_prussia = 0;
-Q.sa_strength = 80;
-Q.sa_militancy = 0.5;
-Q.sa_banned = 0;
-Q.sa_banned_prussia = 0;
-Q.rfb_strength = 130;
-Q.rfb_militancy = 0.5;
-Q.rfb_banned = 0;
-Q.rfb_banned_prussia = 0;
-
-Q.interior_police_strength = 50;
-Q.interior_police_militancy = 1;
-Q.interior_police_loyalty = 0.45;
-
-Q.prussian_police_strength = 90;
-Q.prussian_police_militancy = 1;
-Q.prussian_police_loyalty = 0.5;
+Q.kkk_strength = 1;
+Q.kkk_militancy = 0.01;
+Q.state_militia_strength = 0
+Q.civil_war = 1;
+Q.Us_police_strength = 20;
+Q.Us_police_militancy = 1;
+Q.Us_police_loyalty = 0.7;
 
 // strength includes actual military and de facto reserves?
-Q.reichswehr_strength = 100;
-Q.reichswehr_militancy = 5;
-Q.reichswehr_loyalty = 0.2;
+Q.army_strength = 1000;
+Q.army_militancy = 5;
+Q.army_loyalty = 0.8;
 
 // The state of the country
 
@@ -168,7 +129,7 @@ Q.nationalism = 60;
 // socialism vs capitalism
 Q.socialism = 40;
 // pro-republic vs anti-republic
-Q.pro_republic = 59;
+Q.pro_republic = 70;
 
 Q.emergency_rule = 0;
 
@@ -205,15 +166,14 @@ Q.catholics = 30;
 
 // unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
-// income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
+// income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year, 1931 = 1440 Reichsmarks/year, 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
 Q.income = 1600;
 // what about incomes for different classes? rural workers? middle-class workers?
 
-// inflation (in %; 1928: 2.9; 1929: 0; 1930: -5%; 1931: -10%; 1932: -10%) - source: https://en.wikipedia.org/wiki/File:BSPDRWeltkriseEngl.PNG, derived from https://www.destatis.de/DE/Methoden/WISTA-Wirtschaft-und-Statistik/2009/03/rezession-betrachtung-032009.pdf?__blob=publicationFile
-Q.inflation = 2.9;
+Q.inflation = 3.82;
 
 // economic growth - same source as above, Table 2 (preisbereinigt) - this is also the source for the yearly changes in the great depression.
-Q.economic_growth = 4.4;
+Q.economic_growth = 2.9;
 
 // economic expansion timer
 Q.economic_expansion = 0;
@@ -225,100 +185,226 @@ Q.unemployed_qol = 100;
 Q.old_middle_qol = 100;
 Q.new_middle_qol = 100;
 
-Q.classes = ['workers', 'old_middle', 'new_middle', 'rural', 'unemployed', 'catholics'];
-Q.parties = ['spd', 'kpd', 'z', 'ddp', 'dvp', 'dnvp', 'nsdap', 'other'];
+Q.classes = ['workers', 'middle_class', 'rural', 'freemen', 'immigrant_laborers', 'unemployed'];
+Q.parties = ['rep', 'dem', 'other', 'vac'];  // Republicans, Democrats, minor parties, vacant seats
 
-// TODO: add 'sapd' later on
-Q.sapd_formed = 0;
+// Support for party by social group (normalized later)
+Q.workers_rep = 50;    // Northern industrial workers, pro-Union, pro-GOP
+Q.workers_dem = 30;    // Some urban laborers (esp. Irish immigrants) leaned Democratic
+Q.workers_other = 15;  // Radical labor/reform parties
+Q.workers_vac = 5;     // Marginal/undecided
 
-// Support for party by social group
-// they don't have to sum to 100 since the electoral calculations will be normalized.
-Q.workers_spd = 60;
-Q.workers_kpd = 20;
-Q.workers_z = 5;
-Q.workers_ddp = 0;
-Q.workers_dvp = 0;
-Q.workers_dnvp = 5;
-Q.workers_nsdap = 0;
-Q.workers_other = 10;
+Q.middle_class_rep = 60;   // Northern businessmen, professionals, pro-Reconstruction
+Q.middle_class_dem = 25;   // Some merchants in border states/Dem-leaning cities
+Q.middle_class_other = 10; // Liberal Republicans (1872)
+Q.middle_class_vac = 5;
 
-Q.old_middle_spd = 5;
-Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp= 10;
-Q.old_middle_dvp = 25;
-Q.old_middle_dnvp = 25;
-Q.old_middle_nsdap = 10;
-Q.old_middle_other = 10;
+Q.rural_rep = 30;      // Yeoman farmers (North), some Southern Unionists
+Q.rural_dem = 60;      // White Southern farmers, anti-Reconstruction
+Q.rural_other = 5;     // Agrarian protest movements
+Q.rural_vac = 5;
 
-Q.new_middle_spd = 5;
-Q.new_middle_kpd = 1;
-Q.new_middle_z = 10;
-Q.new_middle_ddp= 25;
-Q.new_middle_dvp = 25;
-Q.new_middle_dnvp = 10;
-Q.new_middle_nsdap = 5;
-Q.new_middle_other = 15;
+Q.freemen_rep = 90;    // Freedmen overwhelmingly Republican (only party supporting rights)
+Q.freemen_dem = 0;     // Democrats hostile to Black suffrage
+Q.freemen_other = 5;   // Independent Black politicians
+Q.freemen_vac = 5;
 
-Q.rural_spd = 10;
-Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp= 5;
-Q.rural_dvp = 15;
-Q.rural_dnvp = 45;
-Q.rural_nsdap = 5;
-Q.rural_other = 10;
+Q.immigrant_laborers_rep = 40;  // German/Scandinavian immigrants (pro-GOP)
+Q.immigrant_laborers_dem = 50;  // Irish Catholics (anti-Black, pro-Democratic)
+Q.immigrant_laborers_other = 5; // Labor unions/nativists
+Q.immigrant_laborers_vac = 5;
 
-Q.unemployed_spd = 25;
-Q.unemployed_kpd = 55;
-Q.unemployed_z = 1;
-Q.unemployed_ddp = 0;
-Q.unemployed_dvp = 0;
-Q.unemployed_dnvp = 5;
-Q.unemployed_nsdap = 15;
-Q.unemployed_other = 9;
-
-Q.catholics_spd = 15;
-Q.catholics_kpd = 2;
-Q.catholics_z = 50;
-Q.catholics_ddp = 0;
-Q.catholics_dvp = 5;
-Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 0;
-Q.catholics_other = 12;
+Q.unemployed_rep = 20;  // War veterans, displaced workers (mixed loyalties)
+Q.unemployed_dem = 50;  // Poor whites in South (resentful of Reconstruction)
+Q.unemployed_other = 25; // Radicals/agrarian protest
+Q.unemployed_vac = 5;
 
 
-// Current Reichstag composition
-// % of Reichstag in Jan 1928
-// source: wikipedia
-// note: the Z figures also include the BVP (Bavarian people's party)
-// since they were ideologically similar, but they were separate parties.
-// They did not have a CDU/CSU-style relationship.
-Q.spd_r = 26;
-Q.kpd_r = 9;
-Q.z_r = 17;
-Q.ddp_r = 6;
-Q.dvp_r = 10;
-Q.dnvp_r = 20;
-Q.nsdap_r = 3;
-Q.other_r = 9;
+// Current House composition
+
+Q.rep_r = 136;
+Q.dem_r = 50;
+Q.other_r = 10;
+Q.vacant_r = 45;
 
 // diff from prev
-Q.old_spd_r = 26;
-Q.old_kpd_r = 9;
-Q.old_z_r = 17;
-Q.old_ddp_r = 6;
-Q.old_dvp_r = 10;
-Q.old_dnvp_r = 20;
-Q.old_nsdap_r = 3;
-Q.old_other_r = 9;
+Q.old_rep_r = 133;
+Q.old_dem_r = 52;
+Q.old_other_r = 12;
+Q.old_vacant_r = 44;
 
-// sapd isn't formed yet, but it may be formed
-Q.sapd_r = 0;
-Q.old_sapd_r = 0;
+// Current Senate composition
 
-// for changing the DDP's name to the DStP
-Q.ddp_name = "DDP";
+Q.rep_senate_r = 36;
+Q.dem_senate_r = 20;
+Q.other_senate_r = 2;
+Q.vacant_senate_r = 18;
+
+Q.old_rep_senate_r = 34;
+Q.old_dem_senate_r = 21;
+Q.old_other_senate_r = 3;
+Q.old_vacant_senate_r = 18;
+
+// break
+
+Q.workers = 13;
+Q.middle_class = 5;
+Q.rural = 52;
+Q.unemployed = 2;
+Q.immigrant_laborers = 8;
+Q.freemen = 12;
+
+Q.states = ["CA", "CT", "DE", "IL", "IN", "IA", "KS", "KY", "ME", "MD", "MA", "MI", "MN", "MO", "NV", "NH", "NJ", "NY", "OH", "OR", "PA", "RI", "VT", "WV", "WI"];
+
+Q.CA_workers = 500000; // Workers in California
+Q.CA_rural = 250000; // Rural population in California
+Q.CA_unemployed = 50000; // Unemployed in California
+Q.CA_immigrant_laborers = 100000; // Immigrant laborers in California
+Q.CA_freemen = 30000; // Freemen in California
+
+Q.CT_workers = 200000; // Workers in Connecticut
+Q.CT_rural = 150000; // Rural population in Connecticut
+Q.CT_unemployed = 20000; // Unemployed in Connecticut
+Q.CT_immigrant_laborers = 30000; // Immigrant laborers in Connecticut
+Q.CT_freemen = 10000; // Freemen in Connecticut
+
+Q.DE_workers = 90000; // Workers in Delaware
+Q.DE_rural = 50000; // Rural population in Delaware
+Q.DE_unemployed = 10000; // Unemployed in Delaware
+Q.DE_immigrant_laborers = 5000; // Immigrant laborers in Delaware
+Q.DE_freemen = 5000; // Freemen in Delaware
+
+Q.IL_workers = 1000000; // Workers in Illinois
+Q.IL_rural = 500000; // Rural population in Illinois
+Q.IL_unemployed = 100000; // Unemployed in Illinois
+Q.IL_immigrant_laborers = 200000; // Immigrant laborers in Illinois
+Q.IL_freemen = 50000; // Freemen in Illinois
+
+Q.IN_workers = 800000; // Workers in Indiana
+Q.IN_rural = 500000; // Rural population in Indiana
+Q.IN_unemployed = 100000; // Unemployed in Indiana
+Q.IN_immigrant_laborers = 100000; // Immigrant laborers in Indiana
+Q.IN_freemen = 40000; // Freemen in Indiana
+
+Q.IA_workers = 400000; // Workers in Iowa
+Q.IA_rural = 300000; // Rural population in Iowa
+Q.IA_unemployed = 50000; // Unemployed in Iowa
+Q.IA_immigrant_laborers = 30000; // Immigrant laborers in Iowa
+Q.IA_freemen = 20000; // Freemen in Iowa
+
+Q.KS_workers = 300000; // Workers in Kansas
+Q.KS_rural = 200000; // Rural population in Kansas
+Q.KS_unemployed = 40000; // Unemployed in Kansas
+Q.KS_immigrant_laborers = 10000; // Immigrant laborers in Kansas
+Q.KS_freemen = 20000; // Freemen in Kansas
+
+Q.KY_workers = 700000; // Workers in Kentucky
+Q.KY_rural = 600000; // Rural population in Kentucky
+Q.KY_unemployed = 50000; // Unemployed in Kentucky
+Q.KY_immigrant_laborers = 70000; // Immigrant laborers in Kentucky
+Q.KY_freemen = 60000; // Freemen in Kentucky
+
+Q.ME_workers = 150000; // Workers in Maine
+Q.ME_rural = 100000; // Rural population in Maine
+Q.ME_unemployed = 10000; // Unemployed in Maine
+Q.ME_immigrant_laborers = 5000; // Immigrant laborers in Maine
+Q.ME_freemen = 5000; // Freemen in Maine
+
+Q.MD_workers = 350000; // Workers in Maryland
+Q.MD_rural = 200000; // Rural population in Maryland
+Q.MD_unemployed = 50000; // Unemployed in Maryland
+Q.MD_immigrant_laborers = 100000; // Immigrant laborers in Maryland
+Q.MD_freemen = 50000; // Freemen in Maryland
+
+Q.MA_workers = 900000; // Workers in Massachusetts
+Q.MA_rural = 300000; // Rural population in Massachusetts
+Q.MA_unemployed = 100000; // Unemployed in Massachusetts
+Q.MA_immigrant_laborers = 300000; // Immigrant laborers in Massachusetts
+Q.MA_freemen = 40000; // Freemen in Massachusetts
+
+Q.MI_workers = 500000; // Workers in Michigan
+Q.MI_rural = 300000; // Rural population in Michigan
+Q.MI_unemployed = 50000; // Unemployed in Michigan
+Q.MI_immigrant_laborers = 70000; // Immigrant laborers in Michigan
+Q.MI_freemen = 30000; // Freemen in Michigan
+
+Q.MN_workers = 150000; // Workers in Minnesota
+Q.MN_rural = 120000; // Rural population in Minnesota
+Q.MN_unemployed = 20000; // Unemployed in Minnesota
+Q.MN_immigrant_laborers = 50000; // Immigrant laborers in Minnesota
+Q.MN_freemen = 10000; // Freemen in Minnesota
+
+Q.MO_workers = 800000; // Workers in Missouri
+Q.MO_rural = 500000; // Rural population in Missouri
+Q.MO_unemployed = 100000; // Unemployed in Missouri
+Q.MO_immigrant_laborers = 150000; // Immigrant laborers in Missouri
+Q.MO_freemen = 50000; // Freemen in Missouri
+
+Q.NV_workers = 50000; // Workers in Nevada
+Q.NV_rural = 30000; // Rural population in Nevada
+Q.NV_unemployed = 10000; // Unemployed in Nevada
+Q.NV_immigrant_laborers = 5000; // Immigrant laborers in Nevada
+Q.NV_freemen = 5000; // Freemen in Nevada
+
+Q.NH_workers = 100000; // Workers in New Hampshire
+Q.NH_rural = 50000; // Rural population in New Hampshire
+Q.NH_unemployed = 10000; // Unemployed in New Hampshire
+Q.NH_immigrant_laborers = 5000; // Immigrant laborers in New Hampshire
+Q.NH_freemen = 5000; // Freemen in New Hampshire
+
+Q.NJ_workers = 400000; // Workers in New Jersey
+Q.NJ_rural = 150000; // Rural population in New Jersey
+Q.NJ_unemployed = 20000; // Unemployed in New Jersey
+Q.NJ_immigrant_laborers = 100000; // Immigrant laborers in New Jersey
+Q.NJ_freemen = 30000; // Freemen in New Jersey
+
+Q.NY_workers = 1200000; // Workers in New York
+Q.NY_rural = 500000; // Rural population in New York
+Q.NY_unemployed = 100000; // Unemployed in New York
+Q.NY_immigrant_laborers = 300000; // Immigrant laborers in New York
+Q.NY_freemen = 150000; // Freemen in New York
+
+Q.OH_workers = 1000000; // Workers in Ohio
+Q.OH_rural = 700000; // Rural population in Ohio
+Q.OH_unemployed = 100000; // Unemployed in Ohio
+Q.OH_immigrant_laborers = 150000; // Immigrant laborers in Ohio
+Q.OH_freemen = 50000; // Freemen in Ohio
+
+Q.OR_workers = 250000; // Workers in Oregon
+Q.OR_rural = 150000; // Rural population in Oregon
+Q.OR_unemployed = 10000; // Unemployed in Oregon
+Q.OR_immigrant_laborers = 50000; // Immigrant laborers in Oregon
+Q.OR_freemen = 20000; // Freemen in Oregon
+
+Q.PA_workers = 1300000; // Workers in Pennsylvania
+Q.PA_rural = 800000; // Rural population in Pennsylvania
+Q.PA_unemployed = 150000; // Unemployed in Pennsylvania
+Q.PA_immigrant_laborers = 250000; // Immigrant laborers in Pennsylvania
+Q.PA_freemen = 200000; // Freemen in Pennsylvania
+
+Q.RI_workers = 100000; // Workers in Rhode Island
+Q.RI_rural = 30000; // Rural population in Rhode Island
+Q.RI_unemployed = 10000; // Unemployed in Rhode Island
+Q.RI_immigrant_laborers = 20000; // Immigrant laborers in Rhode Island
+Q.RI_freemen = 5000; // Freemen in Rhode Island
+
+Q.VT_workers = 50000; // Workers in Vermont
+Q.VT_rural = 30000; // Rural population in Vermont
+Q.VT_unemployed = 5000; // Unemployed in Vermont
+Q.VT_immigrant_laborers = 5000; // Immigrant laborers in Vermont
+Q.VT_freemen = 5000; // Freemen in Vermont
+
+Q.WV_workers = 200000; // Workers in West Virginia
+Q.WV_rural = 100000; // Rural population in West Virginia
+Q.WV_unemployed = 20000; // Unemployed in West Virginia
+Q.WV_immigrant_laborers = 5000; // Immigrant laborers in West Virginia
+Q.WV_freemen = 20000; // Freemen in West Virginia
+
+Q.WI_workers = 500000; // Workers in Wisconsin
+Q.WI_rural = 400000; // Rural population in Wisconsin
+Q.WI_unemployed = 50000; // Unemployed in Wisconsin
+Q.WI_immigrant_laborers = 100000; // Immigrant laborers in Wisconsin
+Q.WI_freemen = 50000; // Freemen in Wisconsin
 
 // array of objects of the form {date: Date(), spd: 10, kpd: 12, ...} for each election
 Q.election_records = [];
@@ -329,17 +415,11 @@ Q.economic_records = [];
 
 
 // State of the government
-Q.president = "Hindenburg";
+Q.president = "Lincoln";
 // starting chancellor: Wilhelm Marx
-Q.chancellor = "Marx";
-Q.chancellor_party = 'Z';
-Q.spd_in_government = 0;
-Q.z_in_government = 1;
-Q.ddp_in_government = 0;
-Q.dvp_in_government = 1;
-Q.dnvp_in_government = 1;
-Q.kpd_in_government = 0;
-Q.nsdap_in_government = 0;
+Q.speaker = "Colfax";
+Q.speaker_party = 'Rep';
+Q.rep_majority = 1;
 
 Q.in_right_coalition = 0;
 // Weimar coalition = SPD + Z + DDP
@@ -502,9 +582,9 @@ Q.n_elections = 0;
 Q.no_majority_elections = 0;
 // elections are not on a timer, but rather there is an indicator for whether you're in an electoral cycle.
 Q.in_election = 1;
-Q.next_election_year = 1928;
-Q.next_election_month = 5;
-Q.next_election_time = 5;
+Q.next_election_year = 1865;
+Q.next_election_month = 11;
+Q.next_election_time = 6;
 // government affairs timers
 Q.agricultural_policy_timer = 0;
 Q.domestic_enemies_timer = 0;
@@ -574,16 +654,16 @@ Q.hirschfeld_advisor = 0; // Magnus Hirschfeld
 Q.radbruch_advisor = 0; // Gustav Radbruch
 Q.stampfer_advisor = 0; // Friedrich Stampfer
 !}
-set-bg: img/map_2.jpg
+set-bg: img/Background.jpg
 new-page: true
 
-> *"Such a general development cannot be attributed to the false tactics of any single party or to the mistakes of individual leaders. On the contrary, the conduct of individual leaders is determined largely by the sentiments of the people as a whole. It would be erroneous, however, to regard the sentiments of the moment as reflecting the natural make-up and character of the people. They are merely the consequence of the special circumstances which have brought about this profound degradation of the entire nation."*
+> *"While the workingmen, the true political powers of the North, allowed slavery to defile their own republic, while before the Negro, mastered and sold without his concurrence, they boasted it the highest prerogative of the white-skinned laborer to sell himself and choose his own master, they were unable to attain the true freedom of labor, or to support their European brethren in their struggle for emancipation; but this barrier to progress has been swept off by the red sea of civil war."*
 
- - Karl Kautsky, *Hitlerism and Social Democracy*, 1934
+ - Karl Marx, *Address of the International Working Men's Association to Abraham Lincoln*, 1865
 
 This is a game of alternate history. While historical accuracy is a major concern, keep in mind that this is a *game*, and that any divergence from actual events will necessarily have to involve some element of make-believe. Nevertheless, please let the author know if there are any glaring mistakes.
 
-For more information on the politics and government of the German Republic, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
+For more information on the politics of Reconstruction, see the "Library" page on the top left. If this is your first time playing the game, it is strongly recommended that you read at least some of this information.
 
 - @1928_easy: Begin (easy difficulty)
 - @1928_main: Begin (normal difficulty)
@@ -623,10 +703,8 @@ audio: shuffle music/1928_1930/FruhlingsliedMendelssohn.mp3 music/1928_1930/AUF_
 new-page: true
 go-to: main if difficulty >= 0; main.main_easy if difficulty < 0
 
-= 1928
+= 1865
 
-It is a bright time for German democracy. After a period of struggle, inflation is finally under control, and the economy is expanding steadily. In foreign policy, we have reached agreements with the Western powers and the Soviet Union that might make genuine peace a reality. 
+The Civil War is approaching an end, and we are thinking about the future. Though the wounds of war run deep, the nation begins to rebuild. The economy in the North is poised for expansion, and the promise of freedom brings new possibilities for millions. In foreign affairs, the United States stands united once more, and with peace restored, we look to the future with cautious optimism.
 
-Now, the task of Social Democracy is to prepare for the next election. The bourgeois-right government of Wilhelm Marx is unpopular, and we stand to gain. Perhaps the next government will have a socialist majority.
-
-
+Now, the task of the Republican Party is to prepare for the next phase of Reconstruction. The Democratic opposition, long tied to the cause of secession and slavery, is discredited in the eyes of many. With President Lincoln's legacy and the Union victory behind us, we stand to shape the future. Perhaps the next Congress will bring a stronger majority to secure full rights and citizenship for the freedmen.
